@@ -6,11 +6,11 @@
   <title>Rose Drive Rentals</title>
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --pink: #cc307e;
+      --pink: #E23591;
       --pink-soft: #ff6fb8;
       --bg-dark: #0b0b10;
       --glass: rgba(255,255,255,0.08);
@@ -38,20 +38,23 @@
       margin: auto;
       padding: 28px 18px 60px;
     }
-    /* Hero */
+
     h1 {
-      font-family: "Inter", sans-serif;
-      font-size: 31px;
-      font-weight: 800;
+      font-size: 50px;
+      font-weight: 500;
       line-height: 1;
       margin-bottom: 18px;
       letter-spacing: 1px;
+      text-align: center;
+      color: var(--pink);
     }
 
     h1 span {
-      color: var(--pink);
+      color: white;
       display: block;
       margin-top: 6px;
+      letter-spacing: 2px;
+      font-size: 45px;
     }
 
     .subtitle {
@@ -62,18 +65,16 @@
       text-align: center;
     }
 
-    /* Buttons */
     .btn {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
       text-decoration: none;
       font-weight: 500;
       border-radius: 16px;
       padding: 18px;
       margin-bottom: 16px;
-      font-size: 18px;
+      font-size: 20px;
     }
 
     .btn-primary {
@@ -82,7 +83,6 @@
       box-shadow: 0 10px 30px rgba(255,60,158,0.4);
     }
 
-    /* Card */
     .card {
       margin-top: 40px;
       padding: 24px;
@@ -97,14 +97,10 @@
     }
 
     .card h2 {
-      font-family: "Inter", sans-serif;
       font-size: 26px;
-      margin-bottom: 8px;
-    }
-
-    .card p {
-      color: var(--text-soft);
-      margin-bottom: 20px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-align: center;
     }
 
     input,
@@ -129,18 +125,13 @@
       border: none;
       border-radius: 16px;
       padding: 16px;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 500;
       color: white;
       width: 100%;
       cursor: pointer;
     }
 
-    .contact-info div {
-      margin-bottom: 8px;
-    }
-
-    /* Footer */
     footer {
       margin-top: 40px;
       text-align: center;
@@ -152,30 +143,47 @@
 
 <body>
   <div class="container">
-  <div class="badge">
-    </div>
 
-    <h1>
-      <span><b>ROSE DRIVE RENTALS</b></span>
-    </h1>
+    <h1>ROSE DRIVE<span>RENTALS</span></h1>
 
     <p class="subtitle">
-       Bold Looks. Iconic Rides. Own Every Street
+      Bold Looks. Iconic Rides. Own Every Street
     </p>
 
     <a class="btn btn-primary" href="https://turo.com/host/5842406" target="_blank">
       Book Your Ride on TURO
     </a>
 
-    <div id="contact" class="card">
+    <div class="card">
       <h2>Contact Us</h2>
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-      <input type="tel" placeholder="Phone Number" />
-      <textarea placeholder="Message"></textarea>
 
-      <button class="send">Send Message</button>
-      
+      <!-- FORMSpree -->
+      <form
+  id="contact-form"
+  action="https://formspree.io/f/meezzrrj"
+  method="POST"
+>
+  <input type="text" name="name" placeholder="Name" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <input type="tel" name="phone" placeholder="Phone Number" />
+  <textarea name="message" placeholder="Message" required></textarea>
+
+  <input type="hidden" name="_subject" value="New Rose Drive Rentals Inquiry">
+
+  <button type="submit" class="send">Send Message</button>
+</form>
+
+<!-- Thank You Message -->
+<div
+  id="thank-you"
+  style="display:none; text-align:center; padding:20px; color:white;"
+>
+  <h3 style="margin-bottom:10px;">Thank you!</h3>
+  <p style="color: rgba(255,255,255,0.75);">
+    Your message has been sent. We’ll be in touch shortly.
+  </p>
+</div>
+
     </div>
 
     <footer>
@@ -183,5 +191,36 @@
     </footer>
 
   </div>
+  <script>
+  const form = document.getElementById("contact-form");
+  const thankYou = document.getElementById("thank-you");
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        form.style.display = "none";
+        thankYou.style.display = "block";
+        form.reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please try again later.");
+    }
+  });
+</script>
+
 </body>
 </html>
