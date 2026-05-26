@@ -5,224 +5,510 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rose Drive Rentals</title>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
       --pink: #E23591;
-      --pink-soft: #ff6fb8;
-      --bg-dark: #0b0b10;
-      --glass: rgba(255,255,255,0.08);
-      --glass-border: rgba(255,255,255,0.15);
-      --text-soft: rgba(255,255,255,0.75);
+      --bg: #080808;
+      --surface: #111111;
+      --border: rgba(255,255,255,0.09);
+      --text: #f0ece6;
+      --muted: rgba(240,236,230,0.5);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: "Inter", sans-serif;
-      background:
-        radial-gradient(circle at top, #451736, transparent 55%),
-        linear-gradient(to bottom, #1b0915, #000000);
-      color: white;
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 420px;
-      margin: auto;
-      padding: 28px 18px 60px;
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 60px);
     }
 
-    h1 {
-      font-size: 50px;
-      font-weight: 500;
-      line-height: 1;
-      margin-bottom: 8px;
-      letter-spacing: 1px;
-      text-align: center;
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(24px, 4vw, 40px) 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.5vw, 22px);
+      letter-spacing: 0.04em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-logo em {
       color: var(--pink);
+      font-style: normal;
     }
 
-    h1 span {
-      color: white;
-      display: block;
-      margin-top: 6px;
-      letter-spacing: 2px;
-      font-size: 45px;
+    .nav-link {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
     }
 
-    .subtitle {
-      font-size: 18px;
-      color: var(--pink-soft);
-      line-height: 1.6;
-      margin-bottom: 34px;
-      text-align: center;
-      -webkit-text-stroke: 1px white;
+    .nav-link:hover { color: var(--text); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: end;
+      padding: clamp(60px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
+      border-bottom: 1px solid var(--border);
     }
 
-    .btn {
+    @media (max-width: 700px) {
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.95;
+      font-weight: 400;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 32px;
+    }
+
+    @media (max-width: 700px) {
+      .hero-right { align-items: flex-start; }
+    }
+
+    .hero-desc {
+      font-size: clamp(14px, 1.5vw, 16px);
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 320px;
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .hero-desc { text-align: left; }
+    }
+
+    .btn-turo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--pink);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 28px;
+      border-radius: 2px;
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-turo:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-turo svg { flex-shrink: 0; }
+
+    /* ── FLEET STRIP ── */
+    .fleet {
+      display: flex;
+      align-items: center;
+      gap: clamp(32px, 5vw, 60px);
+      padding: clamp(32px, 5vw, 52px) 0;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .fleet::-webkit-scrollbar { display: none; }
+
+    .fleet-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    .fleet-item {
+      font-family: var(--serif);
+      font-size: clamp(18px, 2.5vw, 24px);
+      color: var(--text);
+      white-space: nowrap;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .fleet-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background: var(--pink);
+      border-radius: 50%;
+      margin: 0 clamp(16px, 3vw, 28px);
+      vertical-align: middle;
+    }
+
+    /* ── CONTACT SECTION ── */
+    .contact-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 100px);
+      padding: clamp(60px, 10vw, 100px) 0;
+    }
+
+    @media (max-width: 700px) {
+      .contact-section { grid-template-columns: 1fr; }
+    }
+
+    .contact-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .contact-left h2 em {
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .contact-left p {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      max-width: 300px;
+    }
+
+    /* ── FORM ── */
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .field {
+      position: relative;
+      border-top: 1px solid var(--border);
+    }
+
+    .field:last-of-type { border-bottom: 1px solid var(--border); }
+
+    .field label {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      pointer-events: none;
+      transition: opacity 0.15s;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      padding: 32px 0 14px;
+      transition: background 0.2s;
+    }
+
+    .field textarea {
+      resize: none;
+      height: 110px;
+    }
+
+    .field input:focus ~ label,
+    .field textarea:focus ~ label {
+      opacity: 0.6;
+    }
+
+    .submit-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 28px;
+    }
+
+    .submit-hint {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 24px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: var(--pink);
+      border-color: var(--pink);
+      color: #fff;
+    }
+
+    /* ── THANK YOU ── */
+    #thank-you {
+      display: none;
+      padding: 48px 0;
+    }
+
+    #thank-you .ty-check {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--pink);
       display: flex;
       align-items: center;
       justify-content: center;
-      text-decoration: none;
-      font-weight: 500;
-      border-radius: 16px;
-      padding: 18px;
-      margin-bottom: 16px;
-      font-size: 20px;
+      margin-bottom: 20px;
+      color: var(--pink);
     }
 
-    .btn-primary {
-      background: var(--pink);
-      color: white;
-      box-shadow: 0 10px 30px rgba(255,60,158,0.4);
+    #thank-you h3 {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      margin-bottom: 10px;
     }
 
-    .card {
-      margin-top: 40px;
-      padding: 24px;
-      border-radius: 24px;
-      background: linear-gradient(
-        to bottom,
-        rgba(255,255,255,0.12),
-        rgba(255,255,255,0.04)
-      );
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(14px);
-    }
-
-    .card h2 {
-      font-size: 21px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      background: rgba(0,0,0,0.3);
-      border: 1px solid var(--glass-border);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 14px;
-      color: white;
-      font-size: 15px;
-    }
-
-    textarea {
-      resize: none;
-      height: 110px;
-      font-style: italic;
-    }
-
-    .send {
-      background: var(--pink);
-      border: none;
-      border-radius: 16px;
-      padding: 16px;
-      font-size: 20px;
-      font-weight: 500;
-      color: white;
-      width: 100%;
-      cursor: pointer;
-    }
-
-    footer {
-      margin-top: 40px;
-      text-align: center;
+    #thank-you p {
       font-size: 14px;
-      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.7;
     }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: clamp(24px, 4vw, 40px) 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer span {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-tag {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--pink);
+    }
+
+    /* ── FADE IN ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-1 { animation: fadeUp 0.7s ease both; }
+    .fade-2 { animation: fadeUp 0.7s 0.12s ease both; }
+    .fade-3 { animation: fadeUp 0.7s 0.22s ease both; }
+    .fade-4 { animation: fadeUp 0.7s 0.32s ease both; }
   </style>
 </head>
 
 <body>
-  <div class="container">
 
-    <h1>ROSE DRIVE<span>RENTALS</span></h1>
+  <div class="page">
 
-    <p class="subtitle">
-      Jeeps • Slug Bugs • Iconic V8s
-    </p>
+    <!-- NAV -->
+    <nav>
+      <a href="#" class="nav-logo"><em>Rose Drive</em> Rentals</a>
+      <a href="#reserve" class="nav-link">Reserve</a>
+    </nav>
 
-    <a class="btn btn-primary" href="https://turo.com/host/5842406" target="_blank">
-      High Season Availability on TURO
-    </a>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <p class="hero-kicker fade-1">ANN ARBOR • BOSTON • MARTHA'S VINEYARD</p>
+        <h1 class="hero-title fade-2">BOLD Looks<br><em>ICONIC Ridessomething</em><br>OWN<br>Every Street.</h1>
+      </div>
+      <div class="hero-right fade-3">
+        <a class="btn-turo" href="https://turo.com/host/5842406" target="_blank">
+          Book on Turo
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
 
-    <div class="card">
-      <h2>Reserve Off-Season Rates</h2>
-
-      <!-- FORMSpree -->
-      <form
-  id="contact-form"
-  action="https://formspree.io/f/xkozpzdz"
-  method="POST"
->
-  <input type="text" name="name" placeholder="Name" required />
-  <input type="email" name="email" placeholder="Email" required />
-  <input type="tel" name="phone" placeholder="Phone Number" required />
-  <textarea name="message" placeholder="I'm interested in low season rates for a..." required></textarea>
-
-  <input type="hidden" name="_subject" value="New Rose Drive Rentals Inquiry">
-
-  <button type="submit" class="send">Send Message</button>
-</form>
-
-<!-- Thank You Message -->
-<div
-  id="thank-you"
-  style="display:none; text-align:center; padding:20px; color:white;"
->
-  <h3 style="margin-bottom:10px;">Thank you!</h3>
-  <p style="color: rgba(255,255,255,0.75);">
-    Your message has been sent. We’ll be in touch shortly.
-  </p>
-</div>
-
+    <!-- FLEET -->
+    <div class="fleet fade-4">
+      <span class="fleet-label">Fleet</span>
+      <span class="fleet-item">Jeep Wrangler</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">VW Slug Bug</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Iconic V8s</span>
     </div>
 
+    <!-- CONTACT -->
+    <section class="contact-section" id="reserve">
+      <div class="contact-left">
+        <h2>Off-season <em>rates,</em> on request.</h2>
+        <p>Not peak season? Reach out directly for our best pricing. We respond within 24 hours.</p>
+      </div>
+
+      <div>
+        <form id="contact-form" action="https://formspree.io/f/xkozpzdz" method="POST">
+          <div class="form-stack">
+            <div class="field">
+              <input type="text" name="name" id="f-name" required autocomplete="name" />
+              <label for="f-name">Name</label>
+            </div>
+            <div class="field">
+              <input type="email" name="email" id="f-email" required autocomplete="email" />
+              <label for="f-email">Email</label>
+            </div>
+            <div class="field">
+              <input type="tel" name="phone" id="f-phone" required autocomplete="tel" />
+              <label for="f-phone">Phone</label>
+            </div>
+            <div class="field">
+              <textarea name="message" id="f-msg" required></textarea>
+              <label for="f-msg">Message</label>
+            </div>
+          </div>
+
+          <input type="hidden" name="_subject" value="New Rose Drive Rentals Inquiry" />
+
+          <div class="submit-row">
+            <button type="submit" class="btn-submit">
+              Send
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <div id="thank-you">
+          <div class="ty-check" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M3 9.5L7 13.5L15 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Message received.</h3>
+          <p>Thanks for reaching out — we'll be in touch shortly with rates and availability.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer>
-      <div>Rose Drive Rentals</div>
+      <span>© Rose Drive Rentals</span>
+      <span class="footer-tag">Turo Verified Power Host</span>
     </footer>
 
   </div>
+
   <script>
-  const form = document.getElementById("contact-form");
-  const thankYou = document.getElementById("thank-you");
+    const form = document.getElementById("contact-form");
+    const thankYou = document.getElementById("thank-you");
 
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
+    form.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const btn = form.querySelector('.btn-submit');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
 
-    const formData = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
 
-    try {
-      const response = await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-          Accept: "application/json",
-        },
-      });
-
-      if (response.ok) {
-        form.style.display = "none";
-        thankYou.style.display = "block";
-        form.reset();
-      } else {
-        alert("Something went wrong. Please try again.");
+        if (res.ok) {
+          form.style.display = "none";
+          thankYou.style.display = "block";
+          form.reset();
+        } else {
+          btn.textContent = 'Try again';
+          btn.disabled = false;
+          alert("Something went wrong. Please try again.");
+        }
+      } catch {
+        btn.textContent = 'Try again';
+        btn.disabled = false;
+        alert("Network error. Please try again later.");
       }
-    } catch (error) {
-      alert("Network error. Please try again later.");
-    }
-  });
-</script>
+    });
+  </script>
 
 </body>
 </html>
