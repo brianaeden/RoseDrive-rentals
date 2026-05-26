@@ -32,14 +32,13 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── LAYOUT ── */
     .page {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 clamp(20px, 5vw, 60px);
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       display: flex;
       align-items: center;
@@ -73,13 +72,13 @@
 
     .nav-link:hover { color: var(--text); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
       align-items: end;
-      padding: clamp(60px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
+      padding: clamp(24px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -118,19 +117,6 @@
       .hero-right { align-items: flex-start; }
     }
 
-    .hero-desc {
-      font-size: clamp(14px, 1.5vw, 16px);
-      font-weight: 300;
-      line-height: 1.75;
-      color: var(--muted);
-      max-width: 320px;
-      text-align: right;
-    }
-
-    @media (max-width: 700px) {
-      .hero-desc { text-align: left; }
-    }
-
     .btn-turo {
       display: inline-flex;
       align-items: center;
@@ -149,21 +135,17 @@
     }
 
     .btn-turo:hover { opacity: 0.88; transform: translateY(-1px); }
-
     .btn-turo svg { flex-shrink: 0; }
 
-    /* ── FLEET STRIP ── */
-    .fleet {
+    /* FLEET */
+    .fleet-wrap {
       display: flex;
       align-items: center;
-      gap: clamp(32px, 5vw, 60px);
+      gap: 24px;
       padding: clamp(32px, 5vw, 52px) 0;
       border-bottom: 1px solid var(--border);
-      overflow-x: auto;
-      scrollbar-width: none;
+      overflow: hidden;
     }
-
-    .fleet::-webkit-scrollbar { display: none; }
 
     .fleet-label {
       font-size: 10px;
@@ -173,13 +155,26 @@
       flex-shrink: 0;
     }
 
+    .fleet-track {
+      display: flex;
+      align-items: center;
+      gap: clamp(24px, 4vw, 48px);
+      white-space: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      cursor: grab;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .fleet-track::-webkit-scrollbar { display: none; }
+    .fleet-track.grabbing { cursor: grabbing; }
+
     .fleet-item {
       font-family: var(--serif);
       font-size: clamp(18px, 2.5vw, 24px);
       color: var(--text);
       white-space: nowrap;
       flex-shrink: 0;
-      position: relative;
     }
 
     .fleet-dot {
@@ -188,11 +183,10 @@
       height: 5px;
       background: var(--pink);
       border-radius: 50%;
-      margin: 0 clamp(16px, 3vw, 28px);
-      vertical-align: middle;
+      flex-shrink: 0;
     }
 
-    /* ── CONTACT SECTION ── */
+    /* CONTACT */
     .contact-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -225,12 +219,8 @@
       max-width: 300px;
     }
 
-    /* ── FORM ── */
-    .form-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
+    /* FORM */
+    .form-stack { display: flex; flex-direction: column; gap: 0; }
 
     .field {
       position: relative;
@@ -262,29 +252,18 @@
       font-size: 15px;
       font-weight: 300;
       padding: 32px 0 14px;
-      transition: background 0.2s;
     }
 
-    .field textarea {
-      resize: none;
-      height: 110px;
-    }
+    .field textarea { resize: none; height: 110px; }
 
     .field input:focus ~ label,
-    .field textarea:focus ~ label {
-      opacity: 0.6;
-    }
+    .field textarea:focus ~ label { opacity: 0.6; }
 
     .submit-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       margin-top: 28px;
-    }
-
-    .submit-hint {
-      font-size: 12px;
-      color: var(--muted);
     }
 
     .btn-submit {
@@ -311,11 +290,8 @@
       color: #fff;
     }
 
-    /* ── THANK YOU ── */
-    #thank-you {
-      display: none;
-      padding: 48px 0;
-    }
+    /* THANK YOU */
+    #thank-you { display: none; padding: 48px 0; }
 
     #thank-you .ty-check {
       width: 44px;
@@ -343,7 +319,7 @@
       line-height: 1.7;
     }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       border-top: 1px solid var(--border);
       padding: clamp(24px, 4vw, 40px) 0;
@@ -354,11 +330,7 @@
       flex-wrap: wrap;
     }
 
-    footer span {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-    }
+    footer span { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
 
     .footer-tag {
       font-size: 11px;
@@ -367,7 +339,7 @@
       color: var(--pink);
     }
 
-    /* ── FADE IN ── */
+    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -381,7 +353,6 @@
 </head>
 
 <body>
-
   <div class="page">
 
     <!-- NAV -->
@@ -393,7 +364,7 @@
     <!-- HERO -->
     <section class="hero">
       <div>
-        <p class="hero-kicker fade-1">ANN ARBOR • BOSTON • MARTHA'S VINEYARD</p>
+        <p class="hero-kicker fade-1">ANN ARBOR · BOSTON · MARTHA'S VINEYARD</p>
         <h1 class="hero-title fade-2">BOLD Looks,<br><em>ICONIC Rides,</em><br>OWN<br>Every Street.</h1>
       </div>
       <div class="hero-right fade-3">
@@ -407,19 +378,34 @@
     </section>
 
     <!-- FLEET -->
-    <div class="fleet fade-4">
+    <div class="fleet-wrap fade-4">
       <span class="fleet-label">Fleet</span>
-      <span class="fleet-item">Chevorlet Camaro SS</span>
-      <span class="fleet-dot"></span>
-      <span class="fleet-item">Dodge Challenger SRT8</span>
-      <span class="fleet-dot"></span>
-      <span class="fleet-item">Jeep Wrangler Rubicon</span>
-      <span class="fleet-dot"></span>
-      <span class="fleet-item">Jeep Wrangler 4XE (Hybrid)</span>
-      <span class="fleet-dot"></span>
-      <span class="fleet-item">Jeep Wrangler 392 FE</span>
-      <span class="fleet-dot"></span>
-      <span class="fleet-item">Volkswagen #PinkBeetle</span>
+      <div class="fleet-track" id="fleetTrack">
+        <span class="fleet-item">Chevrolet Camaro SS</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Dodge Challenger SRT8</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler Rubicon</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler 4XE Hybrid</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler 392 FE</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Volkswagen #PinkBeetle</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <!-- duplicate for seamless loop -->
+        <span class="fleet-item">Chevrolet Camaro SS</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Dodge Challenger SRT8</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler Rubicon</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler 4XE Hybrid</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Jeep Wrangler 392 FE</span>
+        <span class="fleet-dot" aria-hidden="true"></span>
+        <span class="fleet-item">Volkswagen #PinkBeetle</span>
+      </div>
     </div>
 
     <!-- CONTACT -->
@@ -483,6 +469,7 @@
   </div>
 
   <script>
+    // ── FORM ──
     const form = document.getElementById("contact-form");
     const thankYou = document.getElementById("thank-you");
 
@@ -514,6 +501,56 @@
         alert("Network error. Please try again later.");
       }
     });
+
+    // ── FLEET AUTO-SCROLL + DRAG ──
+    const track = document.getElementById('fleetTrack');
+    let autoX = 0;
+    let isDragging = false;
+    let dragStartX = 0;
+    let scrollAtDrag = 0;
+
+    function autoScroll() {
+      if (!isDragging) {
+        autoX += 0.6;
+        if (autoX >= track.scrollWidth / 2) autoX = 0;
+        track.scrollLeft = autoX;
+      }
+      requestAnimationFrame(autoScroll);
+    }
+
+    // Mouse drag
+    track.addEventListener('mousedown', e => {
+      isDragging = true;
+      dragStartX = e.pageX;
+      scrollAtDrag = track.scrollLeft;
+      autoX = track.scrollLeft;
+      track.classList.add('grabbing');
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      track.scrollLeft = scrollAtDrag - (e.pageX - dragStartX);
+      autoX = track.scrollLeft;
+    });
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      track.classList.remove('grabbing');
+    });
+
+    // Touch drag
+    track.addEventListener('touchstart', e => {
+      isDragging = true;
+      dragStartX = e.touches[0].pageX;
+      scrollAtDrag = track.scrollLeft;
+      autoX = track.scrollLeft;
+    }, { passive: true });
+    track.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      track.scrollLeft = scrollAtDrag - (e.touches[0].pageX - dragStartX);
+      autoX = track.scrollLeft;
+    }, { passive: true });
+    track.addEventListener('touchend', () => { isDragging = false; });
+
+    autoScroll();
   </script>
 
 </body>
