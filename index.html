@@ -6,7 +6,7 @@
   <title>Rose Drive Rentals</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,6 +19,7 @@
       --text: #f0ece6;
       --muted: rgba(240,236,230,0.5);
       --serif: 'DM Serif Display', Georgia, serif;
+      --cursive: 'Cormorant Garamond', Georgia, serif;
       --sans: 'DM Sans', sans-serif;
     }
 
@@ -43,7 +44,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: clamp(24px, 4vw, 40px) 0;
+      padding: clamp(16px, 3vw, 28px) 0 clamp(12px, 2vw, 20px);
       border-bottom: 1px solid var(--border);
     }
 
@@ -60,6 +61,15 @@
       font-style: normal;
     }
 
+    .nav-kicker {
+      font-size: clamp(8px, 1.8vw, 11px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 5px;
+      white-space: nowrap;
+    }
+
     .nav-link {
       font-size: 13px;
       font-weight: 400;
@@ -68,6 +78,7 @@
       color: var(--pink);
       text-decoration: none;
       transition: color 0.2s;
+      white-space: nowrap;
     }
 
     .nav-link:hover { color: var(--text); }
@@ -75,43 +86,57 @@
     /* HERO */
     .hero {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
+      grid-template-columns: 1fr auto;
+      gap: clamp(24px, 4vw, 60px);
       align-items: end;
-      padding: clamp(10px, 15vw, 20px) 0 clamp(40px, 6vw, 80px);
+      padding: clamp(10px, 4vw, 20px) 0 clamp(40px, 6vw, 80px);
       border-bottom: 1px solid var(--border);
     }
 
     @media (max-width: 700px) {
-      .hero { grid-template-columns: 1fr; gap: 40px; }
-    }
-
-    .hero-kicker {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pink);
-      margin-bottom: 24px;
+      .hero { grid-template-columns: 1fr; gap: 32px; }
     }
 
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(52px, 8vw, 96px);
-      line-height: 0.95;
+      font-size: clamp(48px, 7.5vw, 92px);
+      line-height: 1;
       font-weight: 400;
-      white-space: nowrap;
     }
 
-    .hero-title em {
+    .hero-title .bold-line {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: clamp(38px, 6vw, 72px);
+      letter-spacing: -0.01em;
+      display: block;
+    }
+
+    .hero-title .cursive-line {
+      font-family: var(--cursive);
       font-style: italic;
+      font-size: clamp(38px, 6vw, 72px);
       color: var(--muted);
+      display: block;
+      line-height: 1.05;
+    }
+
+    .hero-title .cursive-line .pink {
+      color: var(--pink);
+    }
+
+    .hero-title .own-line {
+      display: block;
+      color: var(--pink);
+      font-size: clamp(45px, 7.5vw, 88px);
     }
 
     .hero-right {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 32px;
+      justify-content: flex-end;
+      padding-bottom: 6px;
     }
 
     @media (max-width: 700px) {
@@ -229,7 +254,6 @@
     }
 
     .field:last-of-type { border-bottom: 1px solid var(--border); }
-    
     .field:first-of-type { border-top: none; }
 
     .field label {
@@ -361,16 +385,20 @@
     <!-- NAV -->
     <nav>
       <div>
-        <a href="#" class="nav-logo"><em>ROSE DRIVE </em><span style="font-size:0.95em">Rentals</span></a>
-        <p class="hero-kicker fade-1"><span style="color: var(--muted)">ANN ARBOR · BOSTON · MARTHA'S VINEYARD</span></p>
+        <a href="#" class="nav-logo"><em>ROSE DRIVE</em> Rentals</a>
+        <p class="nav-kicker">ANN ARBOR · <span style="color:var(--text)">BOSTON</span> · MARTHA'S VINEYARD</p>
       </div>
-       <a href="https://turo.com/host/5842406" target="_blank"  class="nav-link">Reserve</a>
+      <a href="https://turo.com/host/5842406" target="_blank" class="nav-link">Reserve</a>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
       <div>
-        <h1 class="hero-title fade-2">BOLD Looks<span style="font-size: 0.5em">,</span><br><em>ICONIC Rides<span style="font-size: 0.5em">,</span></em><br><span style="color: var(--pink)">OWN Every Street.</span><br></h1>
+        <h1 class="hero-title fade-2">
+          <span class="bold-line">BOLD LOOKS<span style="font-size:0.5em">,</span></span>
+          <span class="cursive-line">Iconic Rides<span style="font-size:0.55em">,</span></span>
+          <span class="own-line">OWN Every Street.</span>
+        </h1>
       </div>
       <div class="hero-right fade-3">
         <a class="btn-turo" href="https://turo.com/host/5842406" target="_blank">
@@ -398,7 +426,6 @@
         <span class="fleet-dot" aria-hidden="true"></span>
         <span class="fleet-item">Volkswagen #PinkBeetle</span>
         <span class="fleet-dot" aria-hidden="true"></span>
-        <!-- duplicate for seamless loop -->
         <span class="fleet-item">Chevrolet Camaro SS</span>
         <span class="fleet-dot" aria-hidden="true"></span>
         <span class="fleet-item">Dodge Challenger SRT8</span>
@@ -416,7 +443,7 @@
     <!-- CONTACT -->
     <section class="contact-section" id="reserve">
       <div class="contact-left">
-        <h2>Off-season <em>rates,</span></em><br>on request.</h2>
+        <h2>Off-season <em><span style="color:var(--pink)">rates,</span></em><br>on request.</h2>
         <p>Not peak season? Reach out directly for our best pricing. We respond within 24 hours.</p>
       </div>
 
@@ -474,7 +501,6 @@
   </div>
 
   <script>
-    // ── FORM ──
     const form = document.getElementById("contact-form");
     const thankYou = document.getElementById("thank-you");
 
@@ -507,7 +533,6 @@
       }
     });
 
-    // ── FLEET AUTO-SCROLL + DRAG ──
     const track = document.getElementById('fleetTrack');
     let autoX = 0;
     let isDragging = false;
@@ -523,7 +548,6 @@
       requestAnimationFrame(autoScroll);
     }
 
-    // Mouse drag
     track.addEventListener('mousedown', e => {
       isDragging = true;
       dragStartX = e.pageX;
@@ -541,7 +565,6 @@
       track.classList.remove('grabbing');
     });
 
-    // Touch drag
     track.addEventListener('touchstart', e => {
       isDragging = true;
       dragStartX = e.touches[0].pageX;
