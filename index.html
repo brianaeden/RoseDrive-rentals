@@ -6,7 +6,7 @@
   <title>Rose Drive Rentals</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;700&family=Cormorant+Garamond:ital@1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +19,6 @@
       --text: #f0ece6;
       --muted: rgba(240,236,230,0.5);
       --serif: 'DM Serif Display', Georgia, serif;
-      --cursive: 'Cormorant Garamond', Georgia, serif;
       --sans: 'DM Sans', sans-serif;
     }
 
@@ -33,25 +32,25 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── LAYOUT ── */
     .page {
       max-width: 1100px;
       margin: 0 auto;
       padding: 0 clamp(20px, 5vw, 60px);
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: clamp(16px, 3vw, 28px) 0 clamp(12px, 2vw, 20px);
+      padding: clamp(24px, 4vw, 40px) 0;
       border-bottom: 1px solid var(--border);
-      align-items: flex-end;
     }
 
     .nav-logo {
       font-family: var(--serif);
-      font-size: clamp(30px, 2.5vw, 34px);
+      font-size: clamp(18px, 2.5vw, 22px);
       letter-spacing: 0.04em;
       color: var(--text);
       text-decoration: none;
@@ -62,85 +61,81 @@
       font-style: normal;
     }
 
-    .nav-kicker {
-      font-size: clamp(8px, 1.8vw, 11px);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--muted);
-      white-space: nowrap;
-    }
-
     .nav-link {
       font-size: 13px;
       font-weight: 400;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--pink);
+      color: var(--muted);
       text-decoration: none;
       transition: color 0.2s;
-      white-space: nowrap;
     }
 
     .nav-link:hover { color: var(--text); }
 
-    /* HERO */
+    @media (max-width: 500px) {
+      .nav-link { display: none; }
+    }
+
+
+
+
+    /* ── HERO ── */
     .hero {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: clamp(24px, 4vw, 60px);
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
       align-items: end;
-      padding: clamp(40px, 6vw, 80px) 0;
+      padding: clamp(60px, 10vw, 120px) 0 clamp(40px, 6vw, 80px);
       border-bottom: 1px solid var(--border);
     }
 
     @media (max-width: 700px) {
-      .hero { grid-template-columns: 1fr; gap: 32px; }
+      .hero { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .hero-kicker {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 24px;
     }
 
     .hero-title {
       font-family: var(--serif);
-      font-size: clamp(48px, 7.5vw, 92px);
-      line-height: 1;
+      font-size: clamp(52px, 8vw, 96px);
+      line-height: 0.95;
       font-weight: 400;
     }
 
-    .hero-title .bold-line {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: clamp(30px, 6vw, 64px);
-      letter-spacing: -0.01em;
-      display: block;
-    }
-
-    .hero-title .cursive-line {
-      font-family: var(--cursive);
+    .hero-title em {
       font-style: italic;
-      font-size: clamp(40px, 6vw, 74px);
       color: var(--muted);
-      display: block;
-      line-height: 1.05;
-    }
-
-    .hero-title .cursive-line .pink {
-      color: var(--pink);
-    }
-
-    .hero-title .own-line {
-      display: block;
-      color: var(--pink);
-      font-size: clamp(40px, 7.5vw, 82px);
     }
 
     .hero-right {
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      justify-content: flex-end;
-      padding-bottom: 6px;
+      gap: 32px;
     }
 
     @media (max-width: 700px) {
       .hero-right { align-items: flex-start; }
+    }
+
+    .hero-desc {
+      font-size: clamp(14px, 1.5vw, 16px);
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 320px;
+      text-align: right;
+    }
+
+    @media (max-width: 700px) {
+      .hero-desc { text-align: left; }
     }
 
     .btn-turo {
@@ -161,46 +156,37 @@
     }
 
     .btn-turo:hover { opacity: 0.88; transform: translateY(-1px); }
+
     .btn-turo svg { flex-shrink: 0; }
 
-    /* FLEET */
-    .fleet-wrap {
+    /* ── FLEET STRIP ── */
+    .fleet {
       display: flex;
       align-items: center;
-      gap: 24px;
-      padding: clamp(10px, 5vw, 15px) 0;
+      gap: clamp(32px, 5vw, 60px);
+      padding: clamp(32px, 5vw, 52px) 0;
       border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
-
-    .fleet-label {
-      font-size: 12px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--pink);
-      flex-shrink: 0;
-    }
-
-    .fleet-track {
-      display: flex;
-      align-items: center;
-      gap: clamp(24px, 4vw, 48px);
-      white-space: nowrap;
       overflow-x: auto;
       scrollbar-width: none;
-      cursor: grab;
-      -webkit-overflow-scrolling: touch;
     }
 
-    .fleet-track::-webkit-scrollbar { display: none; }
-    .fleet-track.grabbing { cursor: grabbing; }
+    .fleet::-webkit-scrollbar { display: none; }
+
+    .fleet-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
 
     .fleet-item {
       font-family: var(--serif);
-      font-size: clamp(16px, 2.5vw, 22px);
+      font-size: clamp(18px, 2.5vw, 24px);
       color: var(--text);
       white-space: nowrap;
       flex-shrink: 0;
+      position: relative;
     }
 
     .fleet-dot {
@@ -209,15 +195,16 @@
       height: 5px;
       background: var(--pink);
       border-radius: 50%;
-      flex-shrink: 0;
+      margin: 0 clamp(16px, 3vw, 28px);
+      vertical-align: middle;
     }
 
-    /* CONTACT */
+    /* ── CONTACT SECTION ── */
     .contact-section {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(40px, 6vw, 100px);
-      padding: clamp(30px, 5vw, 50px) 0;
+      padding: clamp(60px, 10vw, 100px) 0;
     }
 
     @media (max-width: 700px) {
@@ -245,8 +232,12 @@
       max-width: 300px;
     }
 
-    /* FORM */
-    .form-stack { display: flex; flex-direction: column; gap: 0; }
+    /* ── FORM ── */
+    .form-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
 
     .field {
       position: relative;
@@ -254,7 +245,6 @@
     }
 
     .field:last-of-type { border-bottom: 1px solid var(--border); }
-    .field:first-of-type { border-top: none; }
 
     .field label {
       position: absolute;
@@ -279,18 +269,29 @@
       font-size: 15px;
       font-weight: 300;
       padding: 32px 0 14px;
+      transition: background 0.2s;
     }
 
-    .field textarea { resize: none; height: 110px; }
+    .field textarea {
+      resize: none;
+      height: 110px;
+    }
 
     .field input:focus ~ label,
-    .field textarea:focus ~ label { opacity: 0.6; }
+    .field textarea:focus ~ label {
+      opacity: 0.6;
+    }
 
     .submit-row {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
+      justify-content: space-between;
       margin-top: 28px;
+    }
+
+    .submit-hint {
+      font-size: 12px;
+      color: var(--muted);
     }
 
     .btn-submit {
@@ -317,8 +318,11 @@
       color: #fff;
     }
 
-    /* THANK YOU */
-    #thank-you { display: none; padding: 48px 0; }
+    /* ── THANK YOU ── */
+    #thank-you {
+      display: none;
+      padding: 48px 0;
+    }
 
     #thank-you .ty-check {
       width: 44px;
@@ -346,7 +350,7 @@
       line-height: 1.7;
     }
 
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border);
       padding: clamp(24px, 4vw, 40px) 0;
@@ -357,7 +361,11 @@
       flex-wrap: wrap;
     }
 
-    footer span { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; }
+    footer span {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
 
     .footer-tag {
       font-size: 11px;
@@ -366,7 +374,7 @@
       color: var(--pink);
     }
 
-    /* ANIMATIONS */
+    /* ── FADE IN ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -380,25 +388,20 @@
 </head>
 
 <body>
+
   <div class="page">
 
     <!-- NAV -->
     <nav>
-      <div>
-        <a href="#" class="nav-logo"><em>ROSE DRIVE</em> Rentals</a>
-        <p class="nav-kicker">ANN ARBOR · BOSTON · MARTHA'S VINEYARD</p>
-      </div>
-      <a href="https://turo.com/host/5842406" target="_blank" class="nav-link">Reserve</a>
+      <a href="#" class="nav-logo"><em>Rose Drive</em> Rentals</a>
+      <a href="#reserve" class="nav-link">Reserve</a>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
       <div>
-        <h1 class="hero-title fade-2">
-          <span class="bold-line">BOLD LOOKS<span style="font-size:0.5em">,</span></span>
-          <span class="cursive-line">Iconic Rides<span style="font-size:0.55em">,</span></span>
-          <span class="own-line">OWN Every Street.</span>
-        </h1>
+        <p class="hero-kicker fade-1">ANN ARBOR • BOSTON • MARTHA'S VINEYARD</p>
+        <h1 class="hero-title fade-2">BOLD Looks,<br><em>ICONIC Rides,</em><br>OWN<br>Every Street.</h1>
       </div>
       <div class="hero-right fade-3">
         <a class="btn-turo" href="https://turo.com/host/5842406" target="_blank">
@@ -411,39 +414,25 @@
     </section>
 
     <!-- FLEET -->
-    <div class="fleet-wrap fade-4">
+    <div class="fleet fade-4">
       <span class="fleet-label">Fleet</span>
-      <div class="fleet-track" id="fleetTrack">
-        <span class="fleet-item">Chevrolet Camaro SS</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Dodge Challenger SRT8</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler Rubicon</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler 4XE Hybrid</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler 392 FE</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Volkswagen #PinkBeetle</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Chevrolet Camaro SS</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Dodge Challenger SRT8</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler Rubicon</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler 4XE Hybrid</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Jeep Wrangler 392 FE</span>
-        <span class="fleet-dot" aria-hidden="true"></span>
-        <span class="fleet-item">Volkswagen #PinkBeetle</span>
-      </div>
+      <span class="fleet-item">Chevorlet Camaro SS</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Dodge Challenger SRT8</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Jeep Wrangler Rubicon</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Jeep Wrangler 4XE (Hybrid)</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Jeep Wrangler 392 FE</span>
+      <span class="fleet-dot" aria-hidden="true"></span>
+      <span class="fleet-item">Volkswagen #PinkBeetle</span>
     </div>
 
     <!-- CONTACT -->
     <section class="contact-section" id="reserve">
       <div class="contact-left">
-        <h2>Off-season <em><span style="color:var(--pink)">rates,</span></em><br>on request.</h2>
+        <h2>Off-season <em>rates,</em> on request.</h2>
         <p>Not peak season? Reach out directly for our best pricing. We respond within 24 hours.</p>
       </div>
 
@@ -495,7 +484,7 @@
     <!-- FOOTER -->
     <footer>
       <span>© Rose Drive Rentals</span>
-      <span class="footer-tag">Turo Verified All-Star Host</span>
+      <span class="footer-tag">Turo Verified Power Host</span>
     </footer>
 
   </div>
@@ -532,53 +521,6 @@
         alert("Network error. Please try again later.");
       }
     });
-
-    const track = document.getElementById('fleetTrack');
-    let autoX = 0;
-    let isDragging = false;
-    let dragStartX = 0;
-    let scrollAtDrag = 0;
-
-    function autoScroll() {
-      if (!isDragging) {
-        autoX += 0.6;
-        if (autoX >= track.scrollWidth / 2) autoX = 0;
-        track.scrollLeft = autoX;
-      }
-      requestAnimationFrame(autoScroll);
-    }
-
-    track.addEventListener('mousedown', e => {
-      isDragging = true;
-      dragStartX = e.pageX;
-      scrollAtDrag = track.scrollLeft;
-      autoX = track.scrollLeft;
-      track.classList.add('grabbing');
-    });
-    window.addEventListener('mousemove', e => {
-      if (!isDragging) return;
-      track.scrollLeft = scrollAtDrag - (e.pageX - dragStartX);
-      autoX = track.scrollLeft;
-    });
-    window.addEventListener('mouseup', () => {
-      isDragging = false;
-      track.classList.remove('grabbing');
-    });
-
-    track.addEventListener('touchstart', e => {
-      isDragging = true;
-      dragStartX = e.touches[0].pageX;
-      scrollAtDrag = track.scrollLeft;
-      autoX = track.scrollLeft;
-    }, { passive: true });
-    track.addEventListener('touchmove', e => {
-      if (!isDragging) return;
-      track.scrollLeft = scrollAtDrag - (e.touches[0].pageX - dragStartX);
-      autoX = track.scrollLeft;
-    }, { passive: true });
-    track.addEventListener('touchend', () => { isDragging = false; });
-
-    autoScroll();
   </script>
 
 </body>
