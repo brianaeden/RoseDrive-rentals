@@ -15,7 +15,7 @@
       --pink: #E23591;
       --bg: #080808;
       --surface: #111111;
-      --border: rgba(255,255,255,0.09);
+      --border: rgba(255,255,255,0.15);
       --text: #f0ece6;
       --muted: rgba(240,236,230,0.5);
       --serif: 'DM Serif Display', Georgia, serif;
@@ -45,8 +45,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: clamp(16px, 3vw, 28px) 0 clamp(12px, 2vw, 20px);
-      border-bottom: 1px solid var(--border);
+      padding: clamp(16px, 3vw, 28px) 0 clamp(6px, 2vw, 12px);
+      border-bottom: 3px double var(--border);
       align-items: flex-end;
     }
 
@@ -64,6 +64,7 @@
       letter-spacing: 0.04em;
       color: var(--muted);
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .nav-logo em {
@@ -207,7 +208,7 @@
 
     .fleet-item {
       font-family: var(--serif);
-      font-size: clamp(14px, 2.5vw, 20px);
+      font-size: clamp(15px, 2.5vw, 16px);
       color: var(--text);
       white-space: nowrap;
       flex-shrink: 0;
@@ -227,7 +228,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: clamp(40px, 6vw, 100px);
-      padding: clamp(30px, 5vw, 50px) 0;
+      padding: clamp(10px, 6vw, 30px) 0 clamp(10px, 6vw, 30px);
     }
 
     @media (max-width: 700px) {
@@ -253,6 +254,7 @@
       line-height: 1.8;
       color: var(--muted);
       max-width: 300px;
+      white-space: nowrap;
     }
 
     /* FORM */
@@ -398,7 +400,7 @@
         <a href="#" class="nav-logo"><em><span style="font-family: var(--sans);font-weight: 100">ROSEDRIVE</span></em><span style="font-size:0.55em;font-weight: 800"> RENTALS</span></a>
         <p class="nav-kicker">Would <span style="font-size: 1.1em; font-weight: 999; letter-spacing: 0.2em">YOU</span> drive a Pink Car?</p>
       </div>
-      <a href="https://turo.com/host/5842406" target="_blank" class="nav-link">RENT PINK</a>
+      <a href="https://turo.com/host/5842406" target="_blank" class="nav-link">DRIVE PINK CARS</a>
     </nav>
 
     <!-- HERO -->
@@ -412,7 +414,7 @@
       </div>
       <div class="hero-right fade-3">
         <a class="btn-turo" href="https://turo.com/host/5842406" target="_blank">
-          RoseDriveRentals on TURO
+          Availability on TURO
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <path d="M2 12L12 2M12 2H5M12 2V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
@@ -456,7 +458,7 @@
         <h2>Off-season <em><span style="color:var(--pink)">rates,</span></em><br>on request.
         </h2>
         <p>
-            Want to RENT PINK off-season? Contact us to unlock TURO availability and pricing.
+            Want to <span class="nav-link">DRIVE PINK CARS</span> off-season?<br>Unlock low season pricing and TURO availability.
         </p>
       </div>
 
@@ -484,7 +486,7 @@
           <input type="hidden" name="_subject" value="New Rose Drive Rentals Inquiry" />
 
           <div class="submit-row">
-            <button type="submit" class="btn-submit">
+            <button type="submit" class="btn-turo" style="padding:12px 20px; font-size:12px">
               Send
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M1 11L11 1M11 1H4M11 1V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
